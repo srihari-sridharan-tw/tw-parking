@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   Alert,
+  Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -8,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useColorScheme } from "nativewind";
 import { router } from "expo-router";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
@@ -17,7 +19,12 @@ import { getErrorMessage } from "../../services/api";
 
 type Mode = "employee" | "staff";
 
+const TW_LOGO_LIGHT = "https://companieslogo.com/img/orig/TWKS_BIG-d4217dff.png?t=1720244494";
+const TW_LOGO_DARK  = "https://companieslogo.com/img/orig/TWKS_BIG.D-ba8036ba.png?t=1720244494";
+
 export default function LoginScreen() {
+  const { colorScheme } = useColorScheme();
+  const isDark = colorScheme === "dark";
   const [mode, setMode] = useState<Mode>("employee");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -98,6 +105,16 @@ export default function LoginScreen() {
         <TouchableOpacity className="mt-3 items-center" onPress={() => router.push("/(auth)/forgot-password")}>
           <Text className="text-gray-500 dark:text-gray-400 text-sm">Forgot password?</Text>
         </TouchableOpacity>
+
+        {/* Thoughtworks branding */}
+        <View className="items-center mt-12">
+          <Text className="text-gray-400 dark:text-gray-600 text-xs mb-2">Powered by</Text>
+          <Image
+            source={{ uri: isDark ? TW_LOGO_DARK : TW_LOGO_LIGHT }}
+            style={{ width: 140, height: 22 }}
+            resizeMode="contain"
+          />
+        </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
