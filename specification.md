@@ -1,10 +1,10 @@
-# ParkIt!
+# Slotify!
 
 We would like to build a mobile app for parking slot management. Here are the requirements.
 
-1. Three user personas - Administrator, Employee, Security
+1. Three user personas - Administrator, Employee, Security with ability to signup, signin and change password.
 2. Administrator will do the following after login into the system. Need an admin username and password.
-    a. Create, edit, update and delete slots.
+    a. Create, edit, update and delete slots. The slot will be of the format M4333, M2345, M0234, C3454, etc.
     b. View the daily parking report (the report will contain the Parking Slot Id, the Vehicle Number, the total number of used slot and the empty slots at a given time.)
     c. Parking slot will have a slot id, level number, type (two wheeler or four wheeler)
 3. Employee will do the following
@@ -14,4 +14,4 @@ We would like to build a mobile app for parking slot management. Here are the re
 4. Security will do the following after login to the system.
     a. View the daily report and flag if an empty slot is filled. The security needs a provision to enter the vehicle id that is parking in an empty slot. This will be flagged to the admin for follow up.
 
-I want to build a mobile app that runs on iOS and Android, with a backend REST API and any RDBMS. I want you to first confirm the techstack and give me options to pick and choose. As an AI Agent, use the stack that you are most comfortable with.
+I want to build a mobile app that runs on iOS and Android, with a backend REST API and any RDBMS. I want you to first confirm the technology stack and give me options to pick and choose. As an AI Agent, use the stack that you are most comfortable with.

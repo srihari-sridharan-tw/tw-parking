@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker compose:*)",
+      "Bash(cp:*)",
+      "Bash(npm run:*)",
+      "Bash(docker exec:*)",
+      "Bash(DATABASE_URL=postgresql://slotify:slotify@localhost:5432/slotify_test npx prisma:*)",
+      "Bash(npm test:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx expo:*)"
+    ]
+  }
+}

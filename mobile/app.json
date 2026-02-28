@@ -1,0 +1,38 @@
+{
+  "expo": {
+    "name": "Slotify",
+    "slug": "slotify",
+    "version": "1.0.0",
+    "scheme": "slotify",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#3B82F6"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.slotify.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#3B82F6"
+      },
+      "package": "com.slotify.app"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      "expo-asset",
+      "expo-font"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

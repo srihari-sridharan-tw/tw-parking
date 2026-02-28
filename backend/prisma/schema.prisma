@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  EMPLOYEE
+  SECURITY
+}
+
+enum SlotType {
+  TWO_WHEELER
+  FOUR_WHEELER
+}
+
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  passwordHash String
+  role         Role
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  profile          EmployeeProfile?
+  checkIns         CheckIn[]
+  flagsReported    SlotFlag[]           @relation("ReportedBy")
+  flagsResolved    SlotFlag[]           @relation("ResolvedBy")
+  resetTokens      PasswordResetToken[]
+}
+
+model EmployeeProfile {
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  employeeId  String   @unique
+  vehicleId   String
+  phoneNumber String
+  createdAt   DateTime @default(now())
+}
+
+model ParkingSlot {
+  id        String     @id @default(uuid())
+  slotCode  String     @unique
+  level     Int
+  type      SlotType
+  isActive  Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  checkIns  CheckIn[]
+  flags     SlotFlag[]
+}
+
+model CheckIn {
+  id           String      @id @default(uuid())
+  slotId       String
+  slot         ParkingSlot @relation(fields: [slotId], references: [id])
+  userId       String
+  user         User        @relation(fields: [userId], references: [id])
+  vehicleId    String
+  checkedInAt  DateTime    @default(now())
+  checkedOutAt DateTime?
+}
+
+model SlotFlag {
+  id           String      @id @default(uuid())
+  slotId       String
+  slot         ParkingSlot @relation(fields: [slotId], references: [id])
+  vehicleId    String
+  reportedById String
+  reportedBy   User        @relation("ReportedBy", fields: [reportedById], references: [id])
+  reportedAt   DateTime    @default(now())
+  resolvedAt   DateTime?
+  resolvedById String?
+  resolvedBy   User?       @relation("ResolvedBy", fields: [resolvedById], references: [id])
+}
+
+model PasswordResetToken {
+  id        String    @id @default(uuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+}
